@@ -1119,7 +1119,7 @@ mod test {
         assert!(manager.undo_blocking(), "restore j");
 
         let _snapshot_renderer = doc
-            .observe_after_transaction(move |txn| {
+            .observe_after_transaction("snapshot-renderer", move |txn| {
                 let _ = restored_text.diff_range(
                     txn,
                     Some(&cutoff),
@@ -1267,7 +1267,7 @@ mod test {
         assert!(manager.undo_blocking(), "restore j");
 
         let _snapshot_observer = owner
-            .observe_after_transaction(move |txn| {
+            .observe_after_transaction("snapshot-renderer", move |txn| {
                 let _ = restored_text.diff_range(txn, Some(&snapshot), None, YChange::identity);
             })
             .expect("subscribe historical snapshot renderer");
